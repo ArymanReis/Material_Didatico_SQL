@@ -1,3 +1,5 @@
+--  DDL - Data Definition Language (Linguagem de Definição de Dados)
+
 -- Criar base de dados
 CREATE DATABASE IF NOT EXISTS mercado_cafe_db;
 -- Selecionar o banco de dados criado

@@ -1,3 +1,5 @@
+-- DML - Data Manipulation Language (Linguagem de Manipulação de Dados)
+
 USE mercado_cafe_db;
 
 -- Inserindo os primeiros registros na tabela Fazendas
