@@ -14,6 +14,16 @@ FROM
 WHERE
   Estado = ('MG');
 
+-- Pergunta de Negócio: "Eu sei que tenho muitas fazendas em MG, mas em quais estados diferentes eu opero?"
+SELECT DISTINCT 
+  Estado
+FROM 
+  Fazendas;
+
+-- Conta o número de estados distintos
+SELECT COUNT
+  (DISTINCT Estado) AS "Total de Estados com Operações"
+FROM Fazendas;
 
 
 
