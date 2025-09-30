@@ -1,0 +1,37 @@
+A Mudança de Perspectiva
+No Módulo 1, aprendemos a fazer perguntas que nos retornavam linhas existentes da tabela. Por exemplo: "Me mostre as fazendas de MG". O SQL ia lá, encontrava as 5 ou 6 linhas de fazendas de MG e te entregava essa lista. O resultado era um subconjunto dos dados que já existiam.
+
+A agregação é diferente. Ela não te devolve linhas que já existem. Ela lê várias linhas e te devolve UMA ÚNICA LINHA com um resultado calculado a partir delas.
+
+É a diferença entre selecionar documentos de um arquivo e criar um resumo executivo sobre eles.
+
+A Analogia do Post-it
+Pense nos dados da sua tabela Vendas como uma pilha de notas fiscais.
+
+Filtrar (o que fizemos no Módulo 1): É pegar da pilha todas as notas fiscais emitidas em 'Outubro'. Você ainda tem uma pilha de notas fiscais, só que menor.
+
+Agregar (o que faremos agora): É pegar essa pilha de notas de Outubro, somar o valor de todas elas em uma calculadora e anotar o total em um post-it. A sua resposta não é mais a pilha de notas, é o post-it com o resultado final.
+
+As Ferramentas de Agregação
+Para fazer esses cálculos, o SQL nos dá um conjunto de "calculadoras" chamadas funções de agregação. As 5 principais e mais famosas são:
+
+COUNT(): Para contar o número de linhas (Ex: "Quantas vendas foram feitas?").
+
+SUM(): Para somar os valores de uma coluna (Ex: "Qual o total de sacas vendidas?").
+
+AVG(): Para calcular a média dos valores (Ex: "Qual o preço médio por saca?").
+
+MIN(): Para encontrar o menor valor (Ex: "Qual foi a venda mais barata?").
+
+MAX(): Para encontrar o maior valor (Ex: "Qual foi a venda mais cara?").
+
+O Parceiro Inseparável: GROUP BY
+Ok, podemos calcular a soma de todas as sacas vendidas. Mas a pergunta de negócio real é: "Qual a soma de sacas vendidas por estado?" ou "por tipo de café?".
+
+É aqui que entra o parceiro inseparável das funções de agregação: a cláusula GROUP BY (Agrupar por).
+
+O GROUP BY cria "baldes" ou "grupos" antes de a calculadora (SUM, COUNT, etc.) fazer a conta. Ele diz ao SQL: "Crie um balde para cada Estado, jogue as linhas de cada estado em seu respectivo balde, e SÓ ENTÃO calcule a soma para cada balde separadamente".
+
+Para fechar o conceito de hoje, uma pergunta rápida (sem precisar escrever código):
+
+Se o dono da fazenda te pedisse para descobrir "Qual foi o maior volume de produção registrado em um único lote?", qual das 5 funções de agregação que eu mencionei você acha que seria a mais útil para encontrar essa resposta?
