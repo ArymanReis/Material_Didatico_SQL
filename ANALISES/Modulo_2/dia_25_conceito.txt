@@ -1,0 +1,31 @@
+Vamos usar este dia para consolidar tudo. Não vamos aprender nada novo, vamos apenas revisar e reforçar.
+
+1. O que são Funções de Agregação?
+
+Elas transformam muitas linhas em um único resultado. São as "calculadoras" do SQL.
+
+2. O "Quinteto Fantástico" que você aprendeu:
+
+COUNT(): Para contar linhas.
+
+SUM(): Para somar valores.
+
+AVG(): Para calcular médias.
+
+MIN(): Para achar o menor valor.
+
+MAX(): Para achar o maior valor.
+
+3. As Cláusulas de Agrupamento:
+
+GROUP BY: O comando mais importante. Cria os "baldes" ou categorias para que as funções acima possam trabalhar em cada grupo separadamente.
+
+HAVING: O "filtro dos grupos". Age depois do GROUP BY para filtrar os resultados já agregados.
+
+4. A Ordem Lógica:
+
+FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY. Você entendeu perfeitamente por que HAVING consegue filtrar por um COUNT e WHERE não.
+
+Você não precisa "estudar mais" sozinho. O plano já inclui este momento para revisarmos juntos. Você se sente mais confiante com esses conceitos agora do que estava no início da semana? Se sim, a missão foi um sucesso.
+
+Com esta revisão, você oficialmente concluiu o Módulo 2.
