@@ -1,0 +1,37 @@
+Imagine duas de nossas tabelas como dois círculos que se sobrepõem:
+
+Círculo Esquerdo (Tabela A): Nossa tabela Fazendas.
+
+Círculo Direito (Tabela B): Nossa tabela Lotes_Producao.
+
+A "ponte" que conecta os dois é a nossa chave: a coluna ID_Fazenda.
+
+O Diagrama de Venn nos mostra três áreas de interesse principais:
+
+1. A Interseção (O INNER JOIN)
+O que é: A área onde os dois círculos se cruzam.
+
+Significado: Representa os registros que têm correspondência em AMBAS as tabelas. No nosso caso, são as Fazendas QUE TÊM Lotes_Producao registrados, e os Lotes_Producao que pertencem a uma Fazenda que existe.
+
+Quando usar: Quando você quer apenas o resultado onde a ligação entre as tabelas é um sucesso. Este é o tipo de JOIN mais comum.
+
+2. O Círculo Esquerdo Inteiro (O LEFT JOIN)
+O que é: Todo o Círculo Esquerdo, incluindo a parte que se cruza com o direito.
+
+Significado: Representa TODOS os registros da tabela da esquerda (Fazendas), não importa se eles têm ou não uma correspondência na tabela da direita (Lotes_Producao).
+
+Quando usar: Quando a tabela da esquerda é a principal e você quer ver tudo dela. Se uma fazenda tiver um lote, as informações do lote aparecerão. Se uma fazenda não tiver nenhum lote registrado, ela ainda aparecerá na lista, mas as colunas do lote ficarão vazias (NULL). É ótimo para perguntas como "Mostre-me todas as fazendas e, se tiverem, seus lotes de produção".
+
+3. O Círculo Direito Inteiro (O RIGHT JOIN)
+O que é: Todo o Círculo Direito, incluindo a interseção. É o oposto do LEFT JOIN.
+
+Significado: Representa TODOS os registros da tabela da direita (Lotes_Producao), não importa se eles têm ou não correspondência na da esquerda (Fazendas).
+
+Quando usar: Quando a tabela da direita é a principal. É menos comum que o LEFT JOIN, mas útil para encontrar, por exemplo, "lotes órfãos" que foram cadastrados com um ID_Fazenda inválido.
+
+Amanhã, no Dia 28, vamos colocar a mão na massa e escrever nosso primeiro INNER JOIN.
+
+Pergunta para Refletir (sem código):
+Se o dono da fazenda te fizesse o seguinte pedido: "Me mostre uma lista apenas das fazendas que comprovadamente tiveram produção registrada, junto com o ano da safra de seus lotes".
+
+Pensando no Diagrama de Venn, qual das áreas de interesse (e qual tipo de JOIN) você usaria para responder a esse pedido?

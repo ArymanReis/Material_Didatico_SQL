@@ -1,0 +1,29 @@
+1. Chave Primária (Primary Key - PK)
+O que é? É a coluna (ou conjunto de colunas) que serve como o identificador único e exclusivo de cada linha em uma tabela. Pense nela como o "CPF" ou o "RG" de cada registro.
+
+Regras: Uma Chave Primária não pode ser nula (NULL) e nunca pode se repetir.
+
+Em nosso banco:
+
+Na tabela Fazendas, a PK é ID_Fazenda.
+
+Na tabela Lotes_Producao, a PK é ID_Lote.
+
+Na tabela Vendas, a PK é ID_Venda.
+
+2. Chave Estrangeira (Foreign Key - FK)
+O que é? É uma coluna em uma tabela que "aponta" para a Chave Primária de outra tabela. Ela é a "ponte" ou o "gancho" que conecta as duas tabelas.
+
+Regras: O valor em uma Chave Estrangeira precisa existir como uma Chave Primária na tabela para a qual ela aponta. (Isso garante que não possamos registrar um lote para uma fazenda que não existe).
+
+Em nosso banco:
+
+Na tabela Lotes_Producao, a FK é a coluna ID_Fazenda. Ela aponta para a PK da tabela Fazendas.
+
+Na tabela Vendas, a FK é a coluna ID_Lote. Ela aponta para a PK da tabela Lotes_Producao.
+
+Este é o nosso mapa de conexões:
+
+Vendas se conecta a Lotes_Producao através do ID_Lote.
+Lotes_Producao se conecta a Fazendas através do ID_Fazenda.
+
