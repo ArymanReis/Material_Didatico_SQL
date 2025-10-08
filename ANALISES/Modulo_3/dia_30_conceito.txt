@@ -1,0 +1,19 @@
+Quando usar INNER JOIN vs. LEFT JOIN
+
+1. Conceito Principal:
+O objetivo foi entender a diferença de propósito entre os dois tipos de JOIN mais comuns, usando a analogia do Diagrama de Venn.
+
+INNER JOIN: Usado quando você quer ver apenas os registros que têm correspondência em ambas as tabelas. Ele retorna a interseção.
+
+LEFT JOIN: Usado quando você quer ver todos os registros da tabela da esquerda (a do FROM) e apenas os dados correspondentes da tabela da direita. Se não houver correspondência, as colunas da direita ficam NULL.
+
+2. Exercício Realizado (Conceitual):
+O exercício foi analisar dois pedidos de negócio e escolher o JOIN correto, sem escrever código.
+
+Cenário 1: Listar TODAS as fazendas e seus lotes (se tivessem).
+
+Sua resposta correta: LEFT JOIN, porque a prioridade era a lista completa da tabela da esquerda (Fazendas).
+
+Cenário 2: Listar APENAS os lotes que foram efetivamente vendidos.
+
+Sua resposta correta: INNER JOIN, porque a prioridade era a correspondência garantida entre as tabelas (Lotes_Producao e Vendas).
