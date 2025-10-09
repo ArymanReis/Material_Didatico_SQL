@@ -1,0 +1,23 @@
+Com o Dia 31 concluído com sucesso, vamos para os Dias 32 e 33, que são mais conceituais: RIGHT JOIN e FULL OUTER JOIN.
+
+A boa notícia é que, como você já entendeu perfeitamente o LEFT JOIN, estes dois são muito fáceis. Vamos passar por eles conceitualmente, pois na prática você usará o LEFT JOIN 95% do tempo.
+
+Módulo 3 / Dia 32: RIGHT JOIN (O Espelho)
+O que faz? É simplesmente o espelho do LEFT JOIN. Ele retorna TODOS os registros da tabela da direita (a que vem depois da palavra JOIN) e apenas as correspondências da tabela da esquerda.
+
+Por que é raramente usado? Porque é menos intuitivo ler a lógica da direita para a esquerda. É sempre possível reescrever um RIGHT JOIN como um LEFT JOIN simplesmente invertendo a ordem das tabelas. O profissional raro quase sempre opta pelo LEFT JOIN para manter o código claro e consistente.
+
+Módulo 3 / Dia 33: FULL OUTER JOIN (A União Geral)
+O que faz? Este é o "traga tudo". Ele retorna TODOS os registros da tabela da esquerda E TODOS os registros da tabela da direita.
+
+Se houver correspondência, ele mostra os dados combinados.
+
+Se um registro da esquerda não tiver par na direita, as colunas da direita ficam NULL.
+
+Se um registro da direita não tiver par na esquerda, as colunas da esquerda ficam NULL.
+
+Quando usar? É muito útil para análises de "reconciliação", para ver "o que há na lista A que não há na lista B" e "o que há na B que não há na A", tudo de uma vez.
+
+Observação Importante: O MySQL não tem um comando FULL OUTER JOIN direto. Nós o simulamos usando uma combinação de LEFT JOIN e RIGHT JOIN com um comando chamado UNION, que veremos mais à frente no curso.
+
+Não faremos exercícios práticos para estes dois, pois o importante é você saber que eles existem e focar em dominar o INNER JOIN e o LEFT JOIN.

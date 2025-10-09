@@ -52,6 +52,23 @@ CREATE TABLE Vendas (
     REFERENCES Lotes_Producao (ID_Lote)
 );
 
+-- Criando a tabela de compradores
+CREATE TABLE Compradores (
+  ID_Comprador INT PRIMARY KEY AUTO_INCREMENT,
+  Nome_Comprador VARCHAR(150) NOT NULL,
+  Pais_Origem VARCHAR(50),
+  Email_Contato VARCHAR(100)
+);
+
+-- Inserindo registros na tabela Compradores
+INSERT INTO Compradores (Nome_Comprador, Pais_Origem, Email_Contato) VALUES
+('Café & Companhia', 'Brasil', 'contato@cafeecia.com.br'),
+('Grãos do Mundo SA', 'Estados Unidos', 'procurement@worldbeans.com'),
+('Aroma Trading', 'Itália', 'info@aromatrading.it'),
+('Fazenda Sertãozinho', 'Brasil', 'comercial@sertaozinho.com.br'); 
+-- Nosso produtor que também atua como comprador/exportador
+
+
 -- Apagar Tabelas
 DROP TABLE Vendas;
 DROP TABLE Lotes_Producao;
