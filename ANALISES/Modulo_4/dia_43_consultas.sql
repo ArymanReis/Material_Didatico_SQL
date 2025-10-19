@@ -1,23 +1,42 @@
 USE mercado_cafe_db;
 
-/* Para cada lote, mostre seu volume de produção e, ao lado, mostre a média de produção geral para que eu possa comparar. */
+/* Preciso de uma lista de todos os lotes cujo Volume_Producao_Sacas foi maior que a média de produção de todos os lotes. */
+
 SELECT
     ID_Lote,
-    Volume_Producao_Sacas,
-    (SELECT
-        AVG(Volume_Producao_Sacas)
-    FROM
-        Lotes_Producao
-    ) AS "Média Geral"
+    Volume_Producao_Sacas 
 FROM
-    Lotes_Producao;
+    Lotes_Producao
+WHERE
+    Volume_Producao_Sacas > (
+        SELECT  
+            AVG(Volume_Producao_Sacas)
+        FROM
+            Lotes_Producao);
 
--- Subconsulta no FROM (Tabela Derivada)
+-- Desafio
+-- Quero ver o NOME DAS FAZENDAS que produziram lotes com volume acima da média geral, junto com o volume daquele lote.
+
 SELECT
-    AVG(faturamento_da_venda) AS "Faturamento Médio Por Venda"
-FROM (
-    SELECT
-        Quantidade_Vendida_Sacas * Preco_Por_Saca_BRL AS faturamento_da_venda
-    FROM
-        Vendas
-    ) AS relatorio_de_faturamento;
+    f.Nome_Fazenda,
+    lp.Volume_Producao_Sacas
+FROM
+    Lotes_Producao AS lp
+INNER JOIN
+    Fazendas AS f
+ON
+    lp.ID_Fazenda = f.ID_Fazenda
+WHERE
+    lp.Volume_Producao_Sacas > (
+        SELECT
+            AVG(Volume_Producao_Sacas)
+        FROM
+            Lotes_Producao
+    )
+ORDER BY
+    lp.Volume_Producao_Sacas DESC;
+
+
+
+
+

@@ -1,42 +1,33 @@
 USE mercado_cafe_db;
 
-/* Preciso de uma lista de todos os lotes cujo Volume_Producao_Sacas foi maior que a média de produção de todos os lotes. */
+-- Criando a coluna Pontuação de Qualidade
+ALTER TABLE
+    Lotes_Producao
+ADD COLUMN
+    Pontuacao_Qualidade INT;
 
+-- Popular coluna
+UPDATE Lotes_Producao SET Pontuacao_Qualidade = 88 WHERE ID_Lote IN (1, 5, 8, 9, 11);
+UPDATE Lotes_Producao SET Pontuacao_Qualidade = 82 WHERE ID_Lote IN (3, 6, 12, 13);
+UPDATE Lotes_Producao SET Pontuacao_Qualidade = 75 WHERE ID_Lote IN (2, 7);
+UPDATE Lotes_Producao SET Pontuacao_Qualidade = 92 WHERE ID_Lote = 4;
+UPDATE Lotes_Producao SET Pontuacao_Qualidade = 86 WHERE ID_Lote = 10;
+
+SELECT * FROM Lotes_Producao;
+
+-- Pontuação de qualidade dos cafés
 SELECT
     ID_Lote,
-    Volume_Producao_Sacas 
+    CASE
+        WHEN Pontuacao_Qualidade >= 90 THEN 'Categoria A - Premiado'
+        WHEN Pontuacao_Qualidade >= 85 THEN 'Categoria B - Superior'
+        WHEN Pontuacao_Qualidade >= 80 THEN 'Categoria C - Bom'
+        ELSE 'Categoria D - Padrão'
+    END AS "Categoria de Marketing"
 FROM
     Lotes_Producao
-WHERE
-    Volume_Producao_Sacas > (
-        SELECT  
-            AVG(Volume_Producao_Sacas)
-        FROM
-            Lotes_Producao);
-
--- Desafio
--- Quero ver o NOME DAS FAZENDAS que produziram lotes com volume acima da média geral, junto com o volume daquele lote.
-
-SELECT
-    f.Nome_Fazenda,
-    lp.Volume_Producao_Sacas
-FROM
-    Lotes_Producao AS lp
-INNER JOIN
-    Fazendas AS f
-ON
-    lp.ID_Fazenda = f.ID_Fazenda
-WHERE
-    lp.Volume_Producao_Sacas > (
-        SELECT
-            AVG(Volume_Producao_Sacas)
-        FROM
-            Lotes_Producao
-    )
 ORDER BY
-    lp.Volume_Producao_Sacas DESC;
-
-
+    Pontuacao_Qualidade DESC;
 
 
 
