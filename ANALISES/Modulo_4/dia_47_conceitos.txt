@@ -1,0 +1,45 @@
+Vantagens - CTEs vs. Subqueries
+Você acabou de ver na prática a diferença entre escrever a mesma lógica complexa (uma agregação sobre outra agregação) de duas formas:
+
+1. Usando Subconsulta no FROM (O que fizemos no Dia 45):
+
+SQL
+
+SELECT AVG(...)
+FROM (
+    SELECT ... FROM ... GROUP BY ... -- Consulta interna "escondida" aqui
+) AS nome_temporario;
+2. Usando CTE com WITH (O que você acabou de fazer no Dia 46):
+
+SQL
+
+WITH nome_temporario AS (
+    -- 1. Consulta interna declarada aqui em cima
+    SELECT ... FROM ... GROUP BY ...
+)
+-- 2. Consulta principal separada
+SELECT AVG(...)
+FROM nome_temporario;
+Embora o resultado seja exatamente o mesmo, a forma de escrever com WITH (CTE) tem várias vantagens, especialmente em cenários mais complexos:
+
+Vantagem 1: Legibilidade (A mais importante!)
+Subquery: O código fica "aninhado". A lógica interna fica "enterrada" no meio da consulta principal. É difícil ler e entender o fluxo.
+
+CTE: O código é linear, de cima para baixo. Você primeiro define a "peça" (nome_temporario) e depois a usa. É como ler uma receita passo a passo, muito mais intuitivo e organizado.
+
+Vantagem 2: Manutenção
+Subquery: Se você precisar mudar algo na lógica interna, precisa "caçar" onde ela está aninhada. Se a mesma subconsulta for usada em vários lugares (algo que veremos), você precisa mudar em todos eles.
+
+CTE: A lógica de cada etapa está claramente separada. Se precisar ajustar o relatorio_de_producao, você vai direto ao bloco WITH correspondente.
+
+Vantagem 3: Reusabilidade (Dentro da mesma consulta)
+Subquery: Se você precisasse usar o resultado daquela tabela temporária mais de uma vez na mesma consulta principal (por exemplo, para calcular a média E o desvio padrão), você teria que repetir a subconsulta inteira no FROM.
+
+CTE: Uma vez que você define a CTE (WITH nome_temporario AS ...), você pode se referir a nome_temporario várias vezes na consulta principal que vem depois, sem precisar reescrever a lógica. (Veremos isso no Dia 48!).
+
+Vantagem 4: Recursividade (Tópico Avançado)
+As CTEs têm uma capacidade especial (que não veremos neste curso introdutório, mas é bom saber que existe) chamada recursividade. Elas podem "chamar a si mesmas", o que é útil para resolver problemas complexos como hierarquias (ex: organograma de uma empresa) ou caminhos em grafos. Subconsultas não podem fazer isso.
+
+Este foi um dia teórico. Não há código para escrever, mas a lição é fundamental:
+
+Sempre que você precisar criar uma "etapa intermediária" na sua análise (como uma tabela temporária de resultados parciais), prefira usar uma CTE (WITH) em vez de uma Subconsulta no FROM. Seu código será mais limpo, mais fácil de ler e mais profissional.
