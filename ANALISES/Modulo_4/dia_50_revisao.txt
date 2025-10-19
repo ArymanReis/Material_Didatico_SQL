@@ -1,0 +1,28 @@
+Dia 50: Revisão - Transformação, Lógica e Estrutura
+1. Funções de Limpeza e Formatação:
+
+Texto: Você aprendeu a usar UPPER(), LOWER(), LENGTH(), TRIM(), REPLACE(), CONCAT(), LEFT() e RIGHT() para padronizar, limpar, juntar e extrair informações de colunas de texto.
+
+Data: Você aprendeu a usar YEAR(), MONTH(), DAY(), EXTRACT() para desmontar datas, e DATEDIFF(), DATE_ADD() para calcular durações e projetar datas.
+
+2. Lógica Condicional:
+
+CASE WHEN ... THEN ... ELSE ... END: A ferramenta essencial para criar novas colunas baseadas em regras de negócio, classificando e categorizando dados (Ex: "Porte do Lote", "Faixa de Altitude", "Categoria de Marketing").
+
+3. Estruturas Avançadas de Consulta:
+
+Subconsultas (Subqueries): Você aprendeu a usar consultas SELECT dentro de outras:
+
+No WHERE (para filtrar com base em um resultado agregado, como a média).
+
+No SELECT (para trazer um valor de referência para cada linha).
+
+No FROM (para criar tabelas temporárias - "Tabelas Derivadas").
+
+Common Table Expressions (CTEs) com WITH: A alternativa moderna e mais legível para subconsultas no FROM. Você aprendeu a:
+
+Declarar uma CTE (WITH nome AS (...)).
+
+Declarar Múltiplas CTEs, onde uma pode ler da anterior, quebrando problemas complexos em etapas lógicas.
+
+Este módulo foi um grande salto. Você saiu de simplesmente "buscar" dados para ativamente "moldar", "limpar" e "enriquecer" esses dados, usando lógica condicional e estruturas de consulta muito mais sofisticadas.
