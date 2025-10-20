@@ -1,0 +1,34 @@
+Window Functions vs. GROUP BY
+Este dia é puramente conceitual, mas é o mais importante para entender o porquê das Window Functions serem "raras". Não há código novo para escrever, apenas para solidificar a diferença.
+
+Relembrando:
+
+GROUP BY + Função de Agregação (Ex: AVG)
+
+Ação: Agrupa as linhas (ex: por Estado).
+
+Resultado: Retorna uma linha por grupo com o cálculo daquele grupo (a média do estado).
+
+Consequência: Você perde a informação das linhas individuais (os nomes das fazendas daquele estado). É um resumo.
+
+Window Function (Ex: AVG() OVER())
+
+Ação: Calcula sobre uma "janela" de linhas (no nosso exemplo, a tabela inteira), sem agrupar.
+
+Resultado: Retorna todas as linhas originais da consulta.
+
+Consequência: Adiciona uma nova coluna com o resultado do cálculo (a média geral) repetido em cada linha, permitindo a comparação lado a lado.
+
+A Confirmação (O que já fizemos):
+
+A consulta SELECT ..., AVG(Altitude_Metros) OVER() ... FROM Fazendas; que você rodou e deu 1144.0000 na terceira coluna é a demonstração prática da Window Function.
+
+Sua própria conclusão anterior ("Se eu usasse somente o select [com AVG normal], eu só conseguiria ver o resultado total sem as colunas Nome e Altitude") foi a confirmação de que você entendeu a diferença fundamental.
+
+Pergunta para Solidificar o Conceito (sem código):
+
+Se o gerente pedisse: "Quero uma lista de CADA lote de produção e, ao lado de cada um, quero ver o volume MÉDIO de produção de TODOS os lotes".
+
+Você usaria GROUP BY ou uma Window Function (AVG() OVER()) para adicionar essa média geral ao lado de cada lote? Por quê?
+
+Com sua resposta, fechamos oficialmente o Dia 52 e estaremos prontos para o Dia 53 (a prática com SUM() OVER()).
