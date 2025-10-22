@@ -1,0 +1,41 @@
+Revisão - Funções de Ranking
+
+Hoje não temos código novo, apenas uma revisão conceitual para garantir que as diferenças entre as funções que aprendemos estejam claras.
+
+As 4 Funções de Ranking que você dominou:
+
+ROW_NUMBER():
+
+O que faz: Atribui um número sequencial único (1, 2, 3...) a cada linha dentro da partição/janela, baseado na ordem definida no ORDER BY dentro do OVER().
+
+Empates: Recebem números diferentes e sequenciais.
+
+Quando usar: Para criar um identificador de linha único dentro de um grupo ordenado; para pegar estritamente o "Top 1" (mesmo que haja empates).
+
+RANK():
+
+O que faz: Atribui um ranking baseado na ordem, mas dá o mesmo rank para linhas com valores iguais (empates).
+
+Empates: Recebem o mesmo rank.
+
+Pulos: Pula os próximos números do ranking. (Ex: 1, 2, 2, 4...)
+
+Quando usar: Quando você precisa de um ranking oficial onde empates dividem a mesma posição e a posição seguinte reflete o número de itens acima.
+
+DENSE_RANK():
+
+O que faz: Similar ao RANK(), dá o mesmo rank para empates.
+
+Empates: Recebem o mesmo rank.
+
+Pulos: Não pula números. A sequência é sempre contínua. (Ex: 1, 2, 2, 3...)
+
+Quando usar: Quando você quer que empates tenham a mesma posição, mas quer uma sequência de ranks sem buracos, ideal para classificar em "níveis" ou "categorias".
+
+NTILE(N):
+
+O que faz: Divide as linhas (dentro da partição/janela) em N grupos (baldes) de tamanhos o mais iguais possível, baseado na ordem definida no ORDER BY dentro do OVER().
+
+Resultado: Retorna o número do grupo (1 a N) ao qual a linha pertence.
+
+Quando usar: Para análises de distribuição: quartis (N=4), decis (N=10), percentis (N=100), ou qualquer divisão em faixas iguais (ex: "Top 10%", "Próximos 10%").
