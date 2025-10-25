@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- A Pergunta de Negócio: "Preciso de um relatório que mostre, para cada lote de produção, o seu Volume_Producao_Sacas e, ao lado, a soma total de sacas produzidas em todos os lotes."
 
 SELECT

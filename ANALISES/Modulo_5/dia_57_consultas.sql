@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- A Pergunta de Negócio: "Preciso do ranking de lotes por pontuação, mas desta vez quero ver a posição usando tanto o RANK (com pulos) quanto o DENSE_RANK (contínuo), para entender as duas formas de classificar."
 
 -- RANK()

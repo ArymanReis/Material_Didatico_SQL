@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- A Pergunta de Negócio: "Preciso de um relatório que mostre, para cada Classificacao_Cafe, os dois lotes com a maior Pontuacao_Qualidade dentro daquela classificação."
 
 -- Desafio

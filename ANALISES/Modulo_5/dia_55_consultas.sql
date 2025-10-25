@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- A Pergunta de Negócio: "Preciso de um relatório que mostre cada lote de produção e, ao lado do seu volume, quero ver o volume total produzido daquela mesma espécie naquele mesmo ano de safra."
 SELECT
   ID_Lote,

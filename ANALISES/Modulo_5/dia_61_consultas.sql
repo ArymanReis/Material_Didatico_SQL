@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- A Pergunta de Negócio: "Preciso de um relatório que mostre cada venda (ID_Venda), a data (Data_Venda), o preço por saca (Preco_Por_Saca_BRL) e, ao lado, o preço por saca da venda imediatamente anterior (ordenado por data)."
 SELECT
   ID_Venda,

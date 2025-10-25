@@ -67,6 +67,8 @@ FROM
 Reflita: Como esse resultado é diferente do que você obteria se tentasse fazer SELECT AVG(Altitude_Metros) FROM Fazendas;? O que a Window Function te permite ver que a agregação simples não permite?*/
 
 --Exemplo prático
+USE mercado_cafe_db;
+
 SELECT
     Nome_Fazenda,
     Altitude_Metros,

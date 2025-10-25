@@ -1,3 +1,4 @@
+USE mercado_cafe_db;
 -- Variação percentual do LAG()
 SELECT
     ID_Venda,
