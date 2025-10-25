@@ -1,0 +1,47 @@
+o conceito de Somas Acumuladas (Running Totals).
+
+Módulo 5 / Dia 66: Conceito - Somas Acumuladas (Running Totals)
+O que é uma Soma Acumulada?
+
+Imagine uma lista de vendas ao longo do tempo. Uma soma acumulada, para cada venda, não mostra apenas o valor daquela venda, mas sim a soma do valor de todas as vendas ocorridas até aquele momento. É um total que vai "correndo" e crescendo à medida que avançamos na sequência.
+
+Por que é útil? É fundamental para visualizar o crescimento (ou decrescimento) de uma métrica ao longo do tempo. Exemplos:
+
+Faturamento acumulado do mês.
+
+Volume de produção acumulado da safra.
+
+Número acumulado de novos clientes.
+
+Como fazer isso com Window Functions? (A Nova Sintaxe no OVER())
+
+Até agora, nossa cláusula OVER() só tinha PARTITION BY e ORDER BY. Para somas acumuladas (e médias móveis que veremos depois), precisamos definir a extensão da "janela" de cálculo de forma mais precisa.
+
+A sintaxe padrão para uma soma acumulada é:
+
+SUM(coluna) OVER(ORDER BY coluna_de_ordem ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+
+Vamos quebrar essa parte nova:
+
+ORDER BY coluna_de_ordem: Essencial, como sempre, para definir a sequência da acumulação.
+
+ROWS BETWEEN ... AND ...: Define o frame ou a "janela" exata para o cálculo em relação à linha atual.
+
+UNBOUNDED PRECEDING: Significa "desde a primeira linha da partição/janela".
+
+CURRENT ROW: Significa "até a linha atual".
+
+Então, ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW diz ao SQL: "Para esta linha, some os valores desde o início da sequência até chegar aqui".
+
+O Ponto de Vista do Gerente Financeiro
+
+Cenário: O gerente financeiro quer acompanhar o progresso do faturamento ao longo do tempo, vendo não apenas o valor de cada venda, but o total acumulado até aquela data.
+
+A Pergunta de Negócio: "Preciso de um relatório que mostre cada venda ordenada por data e, ao lado do valor da venda, o faturamento total acumulado até aquele dia."
+
+Este foi o conceito do Dia 66. Na próxima aula (Dia 67), vamos colocar essa sintaxe em prática.
+
+Pergunta para Refletir: Se você quisesse calcular o "Volume de Produção Acumulado" ao longo dos anos de safra, qual coluna você usaria no SUM() e qual coluna você usaria no ORDER BY dentro do OVER()?
+
+Resposta:
+SUM(Volume_Producao_Sacas); OVER(ORDER BY Ano_Safra ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
