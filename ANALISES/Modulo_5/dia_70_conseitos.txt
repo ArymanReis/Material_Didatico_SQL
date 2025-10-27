@@ -1,0 +1,46 @@
+SQL Analítico (Window Functions)
+Este módulo foi o coração do "Nível Raro". Vamos recapitular as ferramentas poderosas que você dominou:
+
+1. O Conceito Fundamental:
+
+Window Functions (OVER()): Realizam cálculos sobre um conjunto de linhas ("janela"), mas não colapsam as linhas, retornando o resultado ao lado de cada registro original. Diferente do GROUP BY.
+
+2. Definição da Janela (OVER(...)):
+
+OVER() (vazio): A janela é a tabela inteira.
+
+OVER(PARTITION BY ...): A janela é dividida em subgrupos (partições), e o cálculo é feito separadamente para cada um.
+
+OVER(ORDER BY ...): Essencial para funções de ranking e navegação, define a ordem dentro da janela/partição.
+
+OVER(... ROWS BETWEEN ... AND ...): Define o frame exato da janela (ex: UNBOUNDED PRECEDING, N PRECEDING, CURRENT ROW) para cálculos como Somas Acumuladas e Médias Móveis.
+
+3. Tipos de Funções Usadas com OVER():
+
+Funções de Agregação: SUM(), AVG(), COUNT(), MIN(), MAX(). Usadas com OVER() trazem o resultado agregado para cada linha.
+
+Funções de Ranking: ROW_NUMBER(), RANK(), DENSE_RANK(), NTILE(). Usadas para ordenar e classificar linhas dentro da janela/partição.
+
+Funções de Navegação: LAG(), LEAD(), FIRST_VALUE(), LAST_VALUE(). Usadas para buscar valores de linhas vizinhas ou extremas dentro da janela/partição.
+
+4. Padrões Clássicos que Você Implementou:
+
+Comparação com a Média/Total Geral (AVG() OVER()).
+
+Comparação com a Média/Total do Grupo (AVG() OVER(PARTITION BY ...)).
+
+Ranking Geral (ROW_NUMBER() OVER(ORDER BY ...)).
+
+Ranking com Empates (RANK(), DENSE_RANK()).
+
+"Top N por Grupo" (CTE + ROW_NUMBER() OVER(PARTITION BY ... ORDER BY ...)).
+
+Classificação em Percentis (NTILE()).
+
+Variação vs. Período Anterior (LAG() + Cálculo).
+
+Intervalo Entre Eventos (DATEDIFF() + LAG()).
+
+Somas Acumuladas (SUM() OVER(... ROWS BETWEEN UNBOUNDED PRECEDING ...)).
+
+Médias Móveis (AVG() OVER(... ROWS BETWEEN N PRECEDING ...)).

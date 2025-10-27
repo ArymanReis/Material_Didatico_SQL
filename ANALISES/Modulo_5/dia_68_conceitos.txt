@@ -1,0 +1,40 @@
+Médias Móveis (Moving Averages)
+O que é uma Média Móvel?
+
+Enquanto a Soma Acumulada (Running Total) que vimos no Dia 67 olha para todo o histórico até o ponto atual, uma Média Móvel calcula a média de um número fixo de pontos de dados anteriores (incluindo o atual). Ela "se move" ao longo do tempo, sempre olhando para a mesma janela de observação para trás.
+
+Por que é útil? É uma das ferramentas mais usadas para suavizar flutuações de curto prazo e identificar tendências de médio/longo prazo em séries temporais. Exemplos:
+
+Média móvel de 7 dias de casos de Covid (para ignorar variações diárias e ver a tendência semanal).
+
+Média móvel de 30 dias do preço de uma ação.
+
+Média móvel de 3 meses do faturamento.
+
+Como fazer isso com Window Functions? (Ajustando a Janela)
+
+A sintaxe é muito similar à da Soma Acumulada, mas ajustamos a definição do frame da janela no OVER():
+
+AVG(coluna) OVER(ORDER BY coluna_de_ordem ROWS BETWEEN N PRECEDING AND CURRENT ROW)
+
+Vamos quebrar a parte nova:
+
+ORDER BY coluna_de_ordem: Essencial, define a sequência temporal.
+
+ROWS BETWEEN ... AND ...: Define o frame exato para o cálculo.
+
+N PRECEDING: Significa "N linhas antes da linha atual". (Contrasta com UNBOUNDED PRECEDING que ia até o início).
+
+CURRENT ROW: Significa "até a linha atual".
+
+Então, para uma Média Móvel de 3 Períodos, a janela seria: ROWS BETWEEN 2 PRECEDING AND CURRENT ROW (Isso inclui: a linha 2 posições antes, a linha 1 posição antes e a linha atual = 3 linhas no total para o cálculo da média).
+
+O Ponto de Vista do Analista Financeiro
+
+Cenário: O analista quer suavizar as variações diárias do preço de venda para enxergar melhor a tendência.
+
+A Pergunta de Negócio: "Preciso de um relatório que mostre cada venda (ordenada por data) e, ao lado do preço, a média móvel dos preços das últimas 3 vendas (incluindo a atual)."
+
+Pergunta para Refletir (do final da aula 68): Se você quisesse calcular a "Média Móvel de 7 dias" do volume de produção diário (supondo que tivéssemos dados diários), como você definiria o frame da janela ROWS BETWEEN ... AND ...?
+
+Resposta: ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
