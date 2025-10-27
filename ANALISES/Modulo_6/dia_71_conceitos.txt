@@ -1,0 +1,45 @@
+SQL na Nuvem (O Ambiente Moderno). Este módulo é menos sobre novos comandos SQL e mais sobre entender o contexto onde o SQL que você aprendeu é aplicado hoje em dia, especialmente em grandes volumes de dados.
+
+Começamos com o Dia 71: O que é um Data Warehouse (DW)? E um Data Lake?
+
+Módulo 6 / Dia 71: Conceito - Data Warehouse vs. Data Lake
+No início do nosso curso, falamos sobre "Banco de Dados". Geralmente, estávamos nos referindo a Bancos de Dados Operacionais (OLTP - Online Transaction Processing), como o MySQL que estamos usando. O foco deles é registrar as transações do dia a dia (uma venda, um novo lote, etc.) de forma rápida e eficiente. Eles são otimizados para inserir, atualizar e deletar dados rapidamente.
+
+Mas quando queremos fazer análises complexas, olhando para grandes volumes de dados históricos para encontrar tendências (ex: "Qual a média de vendas nos últimos 5 anos?"), os bancos OLTP podem ficar lentos. Eles não foram projetados para isso.
+
+É aí que entram os sistemas OLAP (Online Analytical Processing), e os dois conceitos mais importantes hoje são Data Warehouse e Data Lake.
+
+1. Data Warehouse (DW) - O Armazém Organizado
+O que é: Um banco de dados otimizado para análise. Ele centraliza dados de várias fontes diferentes da empresa (vendas, marketing, produção), mas de forma estruturada, limpa e padronizada.
+
+Analogia: Pense em um armazém físico onde todos os produtos (dados) são cuidadosamente limpos, etiquetados e organizados em prateleiras específicas (tabelas bem definidas, chamadas de "esquema estrela" ou "snowflake") antes de serem guardados.
+
+Foco: Responder a perguntas de negócio específicas usando dados históricos. É ótimo para criar relatórios, dashboards (como no Power BI) e análises consistentes.
+
+SQL: O SQL que você aprendeu é a linguagem principal para consultar um DW. As Window Functions que vimos são essenciais aqui.
+
+Exemplos de Tecnologia: Amazon Redshift, Google BigQuery, Snowflake, Azure Synapse Analytics.
+
+2. Data Lake - O Lago de Dados Brutos
+O que é: Um repositório que armazena uma quantidade massiva de dados em seu formato bruto, sem a necessidade de estruturá-los previamente. Pode guardar de tudo: tabelas de bancos de dados, arquivos CSV, logs de servidores, vídeos, áudios, posts de redes sociais, dados de sensores (IoT).
+
+Analogia: Pense em um grande lago onde você joga todos os tipos de dados, sem se preocupar em organizá-los imediatamente. A organização (ou "pesca" dos dados relevantes) acontece depois, quando você precisa analisá-los.
+
+Foco: Flexibilidade e armazenamento de grandes volumes a baixo custo. É a base para análises exploratórias, ciência de dados e machine learning, onde você pode precisar dos dados mais brutos possíveis.
+
+SQL: O SQL também é usado para consultar dados em Data Lakes, mas muitas vezes com extensões ou através de ferramentas que conseguem "dar estrutura na hora da leitura" (schema-on-read).
+
+Exemplos de Tecnologia: Amazon S3 (usado como base para lakes), Azure Data Lake Storage, Google Cloud Storage.
+
+DW vs. Data Lake: A Relação
+Eles não são inimigos, mas sim complementares. É muito comum uma empresa ter:
+
+Um Data Lake para guardar tudo (o "pântano" de dados brutos).
+
+Um Data Warehouse que é alimentado com dados selecionados, limpos e transformados do Data Lake, prontos para análise de negócio.
+
+Este foi o conceito do Dia 71. Não temos código hoje, apenas a compreensão dessas duas arquiteturas fundamentais.
+
+Pergunta para Refletir: Se o seu objetivo fosse criar um dashboard no Power BI para mostrar o faturamento mensal consolidado dos últimos 3 anos, você preferiria conectar o Power BI diretamente ao Data Lake ou ao Data Warehouse? Por quê?
+
+Resposta: Data Warehouse, devido aos dados serem estruturados.

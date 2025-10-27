@@ -1,0 +1,50 @@
+Arquitetura de Nuvem (BigQuery, Snowflake, Redshift)
+Hoje, a grande maioria dos Data Warehouses e Data Lakes são construídos "na nuvem", utilizando a infraestrutura de grandes provedores como Amazon Web Services (AWS), Microsoft Azure e Google Cloud Platform (GCP).
+
+Por que a Nuvem?
+
+A nuvem trouxe uma revolução para o mundo dos dados, principalmente por causa de um conceito: a separação entre armazenamento e computação.
+
+No Modelo Antigo (On-Premises): Se você precisasse de mais espaço para guardar dados ou mais poder para processá-los, geralmente tinha que comprar um servidor maior e mais caro, que fazia as duas coisas juntas. Era ineficiente e caro.
+
+No Modelo de Nuvem:
+
+Armazenamento: É extremamente barato e virtualmente infinito (você paga apenas pelo que usa). Exemplos: Amazon S3, Azure Blob Storage, Google Cloud Storage (a base dos Data Lakes).
+
+Computação: É elástica. Você pode "ligar" poder de processamento massivo quando precisa rodar uma consulta complexa e "desligar" (ou diminuir) quando não precisa, pagando apenas pelo tempo de uso.
+
+Os Grandes Players de Data Warehouse na Nuvem:
+
+Embora existam muitos serviços, três nomes dominam o mercado de Data Warehouses modernos na nuvem:
+
+Google BigQuery (GCP):
+
+Características: Totalmente serverless (sem servidor para gerenciar), arquitetura massivamente paralela, cobra por dados escaneados nas consultas ou por capacidade de processamento alocada (slots). Conhecido pela facilidade de uso e integração com o ecossistema Google.
+
+SQL: Usa um dialeto SQL próprio (GoogleSQL), muito similar ao padrão, mas com funções e tipos de dados extras (como suporte nativo a JSON e Arrays, que veremos).
+
+Snowflake:
+
+Características: Multi-cloud (roda sobre AWS, Azure ou GCP), arquitetura única com separação total de armazenamento, múltiplos clusters de computação (Virtual Warehouses) que podem ser ligados, desligados e redimensionados independentemente. Cobra separadamente pelo armazenamento e pelo tempo de computação dos clusters ativos. Muito elogiado pela flexibilidade e performance.
+
+SQL: Dialeto SQL bem próximo ao padrão ANSI SQL, com ótimas extensões.
+
+Amazon Redshift (AWS):
+
+Características: O mais antigo dos três, baseado em clusters de nós (máquinas) que você provisiona e gerencia (embora tenha evoluído para modelos mais elásticos). Cobra principalmente pela hora/nó dos clusters que estão ligados. Forte integração com o ecossistema AWS.
+
+SQL: Baseado no PostgreSQL, mas com diferenças significativas e otimizações para análise colunar.
+
+O que isso significa para você (o Analista)?
+
+O SQL Vive: O SQL que você está aprendendo continua sendo a ferramenta principal para interagir com todos esses sistemas. Os conceitos de SELECT, JOIN, GROUP BY, Window Functions são universais.
+
+Dialetos: Você precisará se adaptar a pequenas diferenças nos dialetos SQL de cada plataforma (ex: nomes de funções podem mudar, suporte a tipos de dados varia).
+
+Performance e Custo: Entender a arquitetura por trás (como a separação de armazenamento e computação) te ajuda a escrever consultas mais eficientes, que rodam mais rápido e custam menos para a empresa. (Veremos mais sobre otimização depois).
+
+Este foi o conceito do Dia 72. Uma visão geral do cenário de nuvem.
+
+Pergunta para Refletir: Baseado na descrição, qual dessas plataformas (BigQuery, Snowflake, Redshift) parece ter o modelo de cobrança mais flexível para uma empresa que tem picos de análise (ex: só precisa de muito poder de processamento no fechamento do mês)?
+
+Resposta: Snowflake
