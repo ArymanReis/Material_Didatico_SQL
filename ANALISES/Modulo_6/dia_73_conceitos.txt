@@ -1,0 +1,64 @@
+Dialetos SQL - Padrão vs. Nuvem
+Como conversamos, os conceitos centrais que você dominou (SELECT, JOIN, GROUP BY, Window Functions) são universais. No entanto, cada sistema de banco de dados, especialmente os DWs em nuvem, implementa suas próprias variações e extensões. É como o português do Brasil vs. Portugal: a base é a mesma, mas há diferenças. 🇧🇷🇵🇹
+
+Principais Diferenças a Esperar:
+Nomes e Sintaxe de Funções: A diferença mais comum.
+
+Exemplo: Obter a data atual pode ser GETDATE(), NOW(), CURRENT_DATE(), dependendo da plataforma. Extrair o ano pode ser YEAR(data) ou EXTRACT(YEAR FROM data). A documentação da plataforma específica é sua melhor amiga aqui.
+
+Tipos de Dados: Plataformas de nuvem introduzem tipos otimizados para análise ou dados semiestruturados.
+
+Exemplo: BigQuery tem GEOGRAPHY, STRUCT/ARRAY. Snowflake tem VARIANT para JSON. MySQL tem JSON.
+
+Tratamento de NULLs: Pequenas diferenças em como NULLs são tratados em cálculos podem existir.
+
+Recursos/Extensões Específicos: Funcionalidades únicas acessíveis via SQL.
+
+Exemplo: BigQuery consultando Google Sheets, Snowflake com Time Travel.
+
+O que isso significa para você (O Analista Raro):
+Sua Base é Sólida: 90% do seu conhecimento é transferível.
+
+Adaptabilidade é Essencial: Acostume-se a consultar a documentação para confirmar a sintaxe exata da função que você precisa na plataforma em uso.
+
+Aproveite os Pontos Fortes: Aprenda e use as funções e tipos de dados específicos da plataforma – eles geralmente oferecem performance ou capacidades únicas (como lidar com JSON nativamente, que veremos em breve).
+
+Este foi o conceito do Dia 73. Não temos código hoje, apenas a conscientização sobre essas variações.
+
+Relembrando a Pergunta para Refletir: Por que você acha que os provedores de nuvem criam seus próprios dialetos SQL em vez de aderir estritamente 100% ao padrão ANSI SQL? Que benefícios eles podem obter com isso?
+
+Performance é, sem dúvida, um dos principais motivos pelos quais os provedores de nuvem criam seus próprios dialetos SQL.
+
+Vamos aprofundar um pouco mais nisso e adicionar outras razões importantes:
+
+Otimização para a Arquitetura Própria (Performance):
+
+Como vimos, BigQuery, Snowflake e Redshift têm arquiteturas internas muito diferentes (serverless, clusters virtuais, nós gerenciados). Ao estender o SQL, eles podem criar funções e sintaxes que são altamente otimizadas para como seus sistemas armazenam e processam dados em paralelo. Aderir estritamente ao padrão ANSI poderia impedi-los de explorar todo o potencial de performance de suas plataformas.
+
+Suporte a Tipos de Dados Modernos e Análises Avançadas:
+
+O padrão ANSI SQL evolui lentamente. O mundo dos dados, não. Provedores de nuvem precisam dar suporte rápido a análises e tipos de dados que são cruciais hoje:
+
+Dados Semi-Estruturados: Funções específicas para consultar JSON e Arrays de forma eficiente (veremos isso em breve!).
+
+Geoespacial: Tipos de dados e funções para análises de mapas e localização.
+
+Machine Learning: Alguns (como BigQuery) integram funções de ML diretamente no SQL.
+
+Criar extensões permite que eles inovem e ofereçam essas capacidades muito mais rápido.
+
+Diferenciação e Recursos Exclusivos:
+
+Oferecer funções ou sintaxes únicas é uma forma de diferenciar seus produtos da concorrência e agregar valor.
+
+Exemplos: O VARIANT e o Time Travel do Snowflake, as funções ML.* do BigQuery, as otimizações específicas do Redshift para dados na AWS. Esses recursos, acessados via SQL, podem ser um fator decisivo para um cliente escolher uma plataforma em vez de outra.
+
+Integração com o Ecossistema:
+
+Os dialetos podem incluir sintaxes que facilitam a integração com outros serviços do mesmo provedor. Por exemplo, o BigQuery tem sintaxe para consultar dados diretamente no Google Cloud Storage ou Google Sheets.
+
+Facilidade de Uso (Às Vezes):
+
+Embora um novo dialeto possa parecer mais complexo no início, algumas extensões são criadas para simplificar tarefas que seriam muito verbosas ou complexas de se fazer usando apenas o SQL padrão estrito.
+
+Em resumo: Performance é chave, mas os dialetos também permitem que os provedores de nuvem inovem mais rápido, suportem dados modernos, ofereçam recursos únicos e integrem melhor seus serviços, adaptando o SQL às necessidades específicas de suas arquiteturas e do mercado atual.

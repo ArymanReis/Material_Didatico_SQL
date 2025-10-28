@@ -1,0 +1,50 @@
+Otimização (Custos e Particionamento/Clusterização)
+A Mudança de Foco:
+
+Bancos Tradicionais (como MySQL/PostgreSQL): A otimização foca muito em Índices. Índices são como o índice remissivo de um livro: estruturas extras que ajudam o banco a encontrar rapidamente as linhas específicas que você pediu no WHERE, acelerando a consulta. Criar bons índices é crucial.
+
+Data Warehouses na Nuvem (BigQuery, Snowflake, Redshift): A otimização foca mais em minimizar a quantidade de dados lidos (escaneados) do armazenamento e em paralelizar o processamento. Por quê?
+
+Custo: Muitos modelos de nuvem (como BigQuery padrão ou Snowflake) cobram pelo volume de dados processados ou pelo tempo de computação. Quanto menos dados sua query ler, mais barata e rápida ela será.
+
+Escala: Estamos falando de tabelas gigantescas (terabytes ou petabytes). Índices tradicionais se tornam menos eficientes ou impraticáveis nessa escala.
+
+Principais Técnicas de Otimização na Nuvem:
+
+Armazenamento Colunar (Automático):
+
+A maioria dos DWs na nuvem armazena dados por coluna, não por linha (como o MySQL faz por padrão).
+
+Benefício: Se sua query só pede 3 colunas (SELECT A, B, C), o sistema só precisa ler os dados dessas 3 colunas do disco, ignorando todas as outras. Isso reduz drasticamente a leitura.
+
+Sua Ação: Sempre peça apenas as colunas que você realmente precisa no SELECT. Evite SELECT * em tabelas grandes na nuvem!
+
+Particionamento:
+
+O que é: Dividir fisicamente uma tabela grande em "pedaços" menores (partições) com base em uma coluna, geralmente uma data (ex: uma partição por dia, mês ou ano).
+
+Benefício: Se você filtra pela coluna de particionamento (ex: WHERE data_venda BETWEEN '2025-10-01' AND '2025-10-31'), o DW sabe que só precisa ler os dados da(s) partição(ões) correspondente(s) a Outubro/2025, ignorando anos de dados de outras partições. Isso reduz massivamente o scan.
+
+Sua Ação: Sempre filtre pela coluna de data/partição quando possível. Consulte a documentação para saber como a tabela está particionada.
+
+Clusterização (ou Ordenação por Chave):
+
+O que é: Dentro de cada partição (ou na tabela toda), os dados são fisicamente ordenados no disco com base em uma ou mais colunas frequentemente usadas em filtros (WHERE) ou junções (JOIN).
+
+Benefício: Ajuda o DW a pular blocos de dados irrelevantes dentro de uma partição. Se a tabela está clusterizada por Estado e você filtra WHERE Estado = 'SP', o sistema pode ir mais diretamente aos blocos que contêm 'SP'. Também acelera JOINs se as tabelas estiverem clusterizadas pelas chaves de junção.
+
+Sua Ação: Filtre pelas colunas de clusterização sempre que possível.
+
+E os Índices Tradicionais? Eles ainda existem em algumas plataformas de nuvem (especialmente Redshift), mas geralmente não são a principal ferramenta para otimizar tabelas muito grandes, sendo substituídos ou complementados pelo particionamento e clusterização.
+
+Este foi um dia conceitual sobre otimização.
+
+A Lição Principal: Para escrever consultas eficientes (rápidas e baratas) na nuvem:
+
+Selecione apenas as colunas necessárias (SELECT colunaA, colunaB).
+
+Filtre o máximo possível, especialmente pelas colunas de particionamento e clusterização (WHERE data = ... AND estado = ...).
+
+Pergunta para Refletir: Por que SELECT * é considerado particularmente "caro" em um Data Warehouse na nuvem que usa armazenamento colunar?
+
+Porque seleciona todas as colunas, sendo assim não utiliza a boa pratica de otimização e performance, sendo especifico na consulta, usando a técnica de parcionamento e clusterização, para reduzir custos
