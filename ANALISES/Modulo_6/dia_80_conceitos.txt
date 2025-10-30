@@ -1,0 +1,60 @@
+Consultas Federadas
+O Problema: Imagine uma grande empresa. Os dados de vendas estão em um Data Warehouse na nuvem (como BigQuery). Os dados de recursos humanos estão em um banco de dados tradicional (como PostgreSQL) dentro da empresa. E os dados de inventário de produtos estão em planilhas do Google Sheets.
+
+O gerente pede um relatório que cruze informações dessas três fontes. A abordagem tradicional seria:
+
+Criar um processo complexo de ETL (Extração, Transformação, Carga).
+
+Mover cópias dos dados de RH e das planilhas para dentro do Data Warehouse.
+
+Só então, fazer a consulta SQL unindo as tabelas dentro do DW. Isso é caro, demorado e cria cópias redundantes dos dados.
+
+A Solução: Consultas Federadas
+
+Consultas Federadas (ou Federated Queries) são uma capacidade de alguns sistemas de banco de dados modernos (especialmente DWs na nuvem como BigQuery) que permitem que você escreva uma única consulta SQL que acesse e junte dados diretamente onde eles estão, sem precisar movê-los previamente para um único lugar.
+
+Como Funciona (Conceitualmente): O sistema "mestre" (o DW) sabe como se conectar a essas fontes de dados externas. Quando você faz a consulta, ele:
+
+Envia partes da consulta para cada sistema de origem (ex: pede os dados de RH filtrados para o PostgreSQL).
+
+Recebe os resultados parciais de cada fonte.
+
+Combina (faz o JOIN, GROUP BY, etc.) esses resultados parciais dentro do sistema mestre para te dar a resposta final.
+
+Analogia: É como um gerente que, em vez de pedir para todos os funcionários trazerem seus relatórios para a sala dele, ele liga para cada departamento, pede a informação específica que precisa e monta o relatório final na mesa dele com as respostas que recebeu.
+
+Benefícios:
+
+Agilidade: Permite análises rápidas que cruzam fontes diversas sem esperar por processos ETL complexos.
+
+Menos Movimentação de Dados: Reduz custos e complexidade, pois os dados são consultados onde residem.
+
+Dados Mais Atuais: Você consulta os dados mais recentes nas fontes originais.
+
+Desafios:
+
+Performance: Consultar dados em sistemas externos pode ser mais lento do que se todos estivessem otimizados no mesmo DW.
+
+Complexidade de Configuração: Configurar as conexões com as fontes externas exige um trabalho inicial.
+
+Limitações: Nem todas as operações SQL podem ser "empurradas" para todas as fontes externas; algumas partes da consulta podem precisar ser processadas no sistema mestre.
+
+Exemplo (Sintaxe Conceitual - BigQuery): Imagine que MeuDW.Vendas é uma tabela no BigQuery, e ConexaoExterna.MeuPostgres.RH é uma tabela externa mapeada a partir do PostgreSQL. A consulta poderia ser:
+
+SQL
+
+SELECT
+    v.Produto,
+    rh.Nome_Vendedor
+FROM
+    MeuDW.Vendas AS v
+INNER JOIN
+    ConexaoExterna.MeuPostgres.RH AS rh
+    ON v.ID_Vendedor = rh.ID_Funcionario
+WHERE
+    v.Data_Venda > '2025-01-01';
+O BigQuery se encarregaria de buscar os dados de vendas nele mesmo, pedir os dados de RH filtrados ao PostgreSQL e juntar os resultados.
+
+Este foi um dia conceitual. Não temos como praticar isso no nosso MySQL local, mas é fundamental você saber que essa capacidade existe nos ambientes de nuvem modernos.
+
+Pergunta para Refletir: Em quais cenários, além do que mencionamos (DW + RH + Planilhas), você acha que Consultas Federadas poderiam ser úteis para um analista de dados?
