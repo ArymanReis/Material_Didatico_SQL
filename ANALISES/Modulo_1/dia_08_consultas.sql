@@ -1,3 +1,6 @@
+-- 1. Visão Geral: Trazer TUDO da tabela Compradores
+SELECT * FROM Compradores;
+
 -- Pergunta de Negócio 1: Eu preciso de uma lista de contato rápido de todas as minhas propriedades.
 SELECT 
   Nome_Fazenda, Municipio, Estado
