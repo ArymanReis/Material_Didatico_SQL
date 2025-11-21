@@ -11,3 +11,12 @@ SELECT * FROM Fazendas
 ORDER BY
   Altitude_Metros 
 DESC
+
+-- 3. O Combo Raro: Apenas Arábica, ordenado pelo Volume
+SELECT * FROM 
+  Lotes_Producao
+WHERE 
+  Especie_Cafe = 'Arábica'
+ORDER BY 
+  Volume_Producao_Sacas
+DESC;
