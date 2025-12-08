@@ -1,9 +1,10 @@
 USE mercado_cafe_db;
 
--- A Pergunta de Negócio: "Preciso de uma lista de todos os nossos compradores para um crachá de evento. O nome do comprador e o país devem estar padronizados em letras maiúsculas. Por curiosidade, inclua também o número de letras no nome do país."
+-- O Desafio de Negócio (Ajustado) O RH precisa gerar crachás e e-mails para os Compradores que virão visitar as fazendas. A regra é:
 SELECT
-  UPPER(Nome_Comprador) AS "Comprador",
-  UPPER(Pais_Origem) AS "País",
-  LENGTH(Pais_Origem)
+  UPPER(Nome_Comprador) AS "Nome_Cracha",
+  LOWER(Nome_Comprador) AS "Email_Sugestao",
+  SUBSTRING(Pais_Origem, 1, 3) AS "Sigla_Pais",
+  LENGTH(Nome_Comprador) AS "Qtd_Letras"
 FROM
   Compradores;
